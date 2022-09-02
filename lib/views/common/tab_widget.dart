@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:terminev/providers/terminal_provider.dart';
 
-class CustomTab extends StatelessWidget {
+class TabWidget extends HookConsumerWidget {
   final String title;
-  const CustomTab({
+  final FocusNode focusNode;
+  const TabWidget({
     Key? key,
     required this.title,
+    required this.focusNode,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final terminals = ref.watch(terminalProvider);
     return Container(
-      width: 500.0,
-      height: 500.0,
+      width: 150.0,
+      height: 100.0,
       color: const Color(0xff292d32),
       alignment: Alignment.center,
       transformAlignment: Alignment.center,
@@ -46,8 +51,24 @@ class CustomTab extends StatelessWidget {
               ),
             ],
           ),
-          child: Text(
-            title,
+          child: Row(
+            children: [
+              Expanded(
+                child: Center(
+                  child: Text(
+                    title,
+                  ),
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  terminals.removeTerminal(focusNode);
+                },
+                icon: const Icon(
+                  Icons.close,
+                ),
+              ),
+            ],
           ),
         ),
       ),

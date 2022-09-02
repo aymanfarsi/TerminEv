@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:terminev/src/init_app.dart';
-import 'package:terminev/views/terminal_full.dart';
-import 'package:terminev/views/terminal_settings.dart';
-import 'package:terminev/views/terminal_split.dart';
+import 'package:terminev/services/init_app.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:terminev/views/terminal_split/terminal_split.dart';
+import 'package:terminev/views/terminal_prefs/terminal_preferences.dart';
+import 'package:terminev/views/terminal_full/terminal_full.dart';
 
 Future<void> main() async {
   await initApp();
-  runApp(const TerminEv());
+  runApp(
+    const ProviderScope(
+      child: TerminEv(),
+    ),
+  );
 }
 
 class TerminEv extends StatelessWidget {
@@ -15,7 +19,7 @@ class TerminEv extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'TerminEv',
       initialRoute: '/',
