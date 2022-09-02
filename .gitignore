@@ -45,3 +45,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+/AppDir/
+TerminEv-latest-x86_64.AppImage
+/appimage-build/
